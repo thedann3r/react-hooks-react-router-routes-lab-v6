@@ -1,16 +1,32 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import MovieCard from "../components/MovieCard";
 
 function Home() {
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    fetch("https://api.example.com/movies")
+      .then(response => response.json())
+      .then(data => setMovies(data.results))
+      .catch(error => console.error("Error fetching movies:", error));
+  }, []);
+
   return (
     <>
       <header>
-        {/* What component should go here? */}
+        <h1>Home Page</h1>
       </header>
       <main>
-        {/* Info goes here! */}
+        <ul>
+          {movies.map((movie) => (
+            <li key={movie.id}>
+              <MovieCard movie={movie} />
+            </li>
+          ))}
+        </ul>
       </main>
     </>
   );
-};
+}
 
 export default Home;
