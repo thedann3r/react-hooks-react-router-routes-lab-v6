@@ -7,7 +7,7 @@ function Home() {
   useEffect(() => {
     fetch("https://api.example.com/movies")
       .then(response => response.json())
-      .then(data => setMovies(data.results))
+      .then(data => setMovies(data))
       .catch(error => console.error("Error fetching movies:", error));
   }, []);
 
